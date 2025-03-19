@@ -1,5 +1,5 @@
 import pygame
-import chess_draft
+import chess_console
 
 pygame.init()  # Initialize Pygame
 WIDTH, HEIGHT = 700, 600  # Set the window dimensions
@@ -25,20 +25,20 @@ BLACK_KNIGHT_IMAGE = "black knight.png"
 BLACK_BISHOP_IMAGE = "black bishop.png"
 BLACK_QUEEN_IMAGE = "black queen.png"
 BLACK_KING_IMAGE = "black king.png"
-WHITE_PAWN_ID = chess_draft.WHITE_PAWN
-WHITE_ROOK_ID = chess_draft.WHITE_ROOK
-WHITE_KNIGHT_ID = chess_draft.WHITE_KNIGHT
-WHITE_BISHOP_ID = chess_draft.WHITE_BISHOP
-WHITE_QUEEN_ID = chess_draft.WHITE_QUEEN
-WHITE_KING_ID = chess_draft.WHITE_KING
-BLACK_PAWN_ID = chess_draft.BLACK_PAWN
-BLACK_ROOK_ID = chess_draft.BLACK_ROOK
-BLACK_KNIGHT_ID = chess_draft.BLACK_KNIGHT
-BLACK_BISHOP_ID = chess_draft.BLACK_BISHOP
-BLACK_QUEEN_ID = chess_draft.BLACK_QUEEN
-BLACK_KING_ID = chess_draft.BLACK_KING
-WHITE_PLAYER = chess_draft.PLAYER_WHITE
-BLACK_PLAYER = chess_draft.PLAYER_BLACK
+WHITE_PAWN_ID = chess_console.WHITE_PAWN
+WHITE_ROOK_ID = chess_console.WHITE_ROOK
+WHITE_KNIGHT_ID = chess_console.WHITE_KNIGHT
+WHITE_BISHOP_ID = chess_console.WHITE_BISHOP
+WHITE_QUEEN_ID = chess_console.WHITE_QUEEN
+WHITE_KING_ID = chess_console.WHITE_KING
+BLACK_PAWN_ID = chess_console.BLACK_PAWN
+BLACK_ROOK_ID = chess_console.BLACK_ROOK
+BLACK_KNIGHT_ID = chess_console.BLACK_KNIGHT
+BLACK_BISHOP_ID = chess_console.BLACK_BISHOP
+BLACK_QUEEN_ID = chess_console.BLACK_QUEEN
+BLACK_KING_ID = chess_console.BLACK_KING
+WHITE_PLAYER = chess_console.PLAYER_WHITE
+BLACK_PLAYER = chess_console.PLAYER_BLACK
 
 # Define the positions of the board squares
 BOARD_SQUARES_POS = [
@@ -131,7 +131,7 @@ ALL_PIECES = [w_pawn_1, w_pawn_2, w_pawn_3, w_pawn_4, w_pawn_5, w_pawn_6, w_pawn
 # Function to convert the board state to a matrix
 def convert_board_to_matrix() -> list[list]:
     # Creating a 8x8 matrix board
-    help_matrix = [[chess_draft.EMPTY_CELL for _ in range(8)] for _ in range(8)]
+    help_matrix = [[chess_console.EMPTY_CELL for _ in range(8)] for _ in range(8)]
     for p_obj in ALL_PIECES:
         matrix_pos = square_to_matrix_pos(p_obj.pos)  # Convert the square coordinates into matrix coordinates: (1-8, 1-8)
         row, col = matrix_pos
@@ -311,7 +311,7 @@ def main():
                             target_piece = board_as_matrix[end_pos[0]][end_pos[1]]
 
                             # Handles castling
-                            if chess_draft.valid_castling(start_pos, end_pos, board_as_matrix):
+                            if chess_console.valid_castling(start_pos, end_pos, board_as_matrix):
                                 target_rook = None
                                 # Finding the specific object of the rook
                                 for p_obj in ALL_PIECES:
@@ -342,8 +342,8 @@ def main():
                                     castling_occurred_for_black = True
 
                             # switching between pieces of the same color if a mistake was occurred in selecting piece
-                            elif (target_piece in chess_draft.BLACK_PIECES and current_player_color == chess_draft.PLAYER_BLACK) \
-                                    or (target_piece in chess_draft.WHITE_PIECES and current_player_color == chess_draft.PLAYER_WHITE):
+                            elif (target_piece in chess_console.BLACK_PIECES and current_player_color == chess_console.PLAYER_BLACK) \
+                                    or (target_piece in chess_console.WHITE_PIECES and current_player_color == chess_console.PLAYER_WHITE):
                                 for p_obj in ALL_PIECES:
                                     if p_obj.pos == clicked_square:
                                         piece = p_obj
@@ -353,10 +353,10 @@ def main():
                                 selected_piece = True
 
                             # Handles the case of a regular movement on the board such as capturing or forwardness
-                            elif chess_draft.is_valid_move(start_pos, end_pos, board_as_matrix, current_player_color) and not \
-                                    chess_draft.is_current_king_in_check(start_pos, end_pos, board_as_matrix, current_player_color):
+                            elif chess_console.is_valid_move(start_pos, end_pos, board_as_matrix, current_player_color) and not \
+                                    chess_console.is_current_king_in_check(start_pos, end_pos, board_as_matrix, current_player_color):
                                 check_mark = False
-                                if board_as_matrix[end_pos[0]][end_pos[1]] != chess_draft.EMPTY_CELL:  # Checks the case of capturing opposite piece
+                                if board_as_matrix[end_pos[0]][end_pos[1]] != chess_console.EMPTY_CELL:  # Checks the case of capturing opposite piece
                                     captured_piece = None
                                     for p_obj in ALL_PIECES:
                                         if p_obj.pos == clicked_square:
@@ -370,8 +370,8 @@ def main():
                                 selected_piece = False
                                 board_as_matrix = convert_board_to_matrix()
 
-                                current_player_moves = chess_draft.all_possible_moves(board_as_matrix, current_player_color)
-                                if chess_draft.is_checkmate(current_player_moves, board_as_matrix, opponent_player_color):  # Checks for checkmate
+                                current_player_moves = chess_console.all_possible_moves(board_as_matrix, current_player_color)
+                                if chess_console.is_checkmate(current_player_moves, board_as_matrix, opponent_player_color):  # Checks for checkmate
                                     selected_piece = True
                                     selected_square = True
                                     win = True
@@ -409,7 +409,7 @@ def main():
                                         current_player_color = WHITE_PLAYER
                                         opponent_player_color = BLACK_PLAYER
 
-                            elif chess_draft.is_current_king_in_check(start_pos, end_pos, board_as_matrix, current_player_color):
+                            elif chess_console.is_current_king_in_check(start_pos, end_pos, board_as_matrix, current_player_color):
                                 check_mark = True
 
                         elif not selected_piece:  # If 'selected piece' has not been selected yet
