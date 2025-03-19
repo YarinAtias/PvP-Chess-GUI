@@ -1,11 +1,3 @@
-"""
-   If you are seeing this code, you probably wanted to see what's behind the amazing, sophisticated and marvelous thing
-   that my friend and I have created. Follow us on our Instagrams if you'd like to, _yarin_atias and ofir_luski.
-
-   Special thanks to our smart, handsome and amazing teacher, Daniel Ayzenshteyn. Appreciating a lot.
-   Have fun observing our code.
-"""
-
 import copy
 from colorama import Fore
 
