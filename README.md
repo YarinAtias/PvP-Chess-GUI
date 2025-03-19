@@ -1,7 +1,7 @@
 If you want to play there are 2 options.
 
 The first option is to play on the console where the pieces are represented by their first letter and in order to move a 
-piece you need to input the start position and the end position. if you want to play this please 
+piece you need to input the start position and the end position. if you want to play this version please 
 open the chess directory, open the file named 'chess_console.py' and run it.
 
 The second option which is much cooler is to play the GUI version of the Chess where you play on an actual board and 
