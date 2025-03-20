@@ -1,3 +1,5 @@
+This project is about playing chess with other friend wether on the console or on a GUI version.
+
 If you want to play there are 2 options.
 
 The first option is to play on the console where the pieces are represented by their first letter and in order to move a 
