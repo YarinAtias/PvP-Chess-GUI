@@ -1,4 +1,4 @@
-This project is about playing chess with other friend wether on the console or on a GUI version.
+This project is about playing chess with other friend whether on the console or on a GUI version.
 
 If you want to play there are 2 options.
 
